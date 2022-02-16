@@ -9,7 +9,7 @@ import color from 'color';
 import { animated, useTransition, interpolate } from 'react-spring';
 import { useTooltip, useTooltipInPortal, defaultStyles } from '@visx/tooltip';
 import { localPoint } from '@visx/event';
-import { useThemeUI } from 'theme-ui';
+import { useThemeUI, useColorMode } from 'theme-ui';
 import { ExactTheme } from 'src/theme';
 import { IBaseDataPoint } from 'types';
 import { PieChartProps } from './types';
@@ -52,8 +52,7 @@ const AnimatedPie: FC<AnimatedPieProps<BaseDataPoint>> = ({
 }) => {
   const context = useThemeUI();
 
-  const { primary, text, highlight, purple, muted } = context.theme
-    .rawColors as ExactTheme['rawColors'];
+  const { text } = context.theme.rawColors as ExactTheme['rawColors'];
   const transitions = useTransition<PieArcDatum<BaseDataPoint>, AnimatedStyles>(
     arcs,
     {
@@ -115,6 +114,7 @@ export const PieChart: FC<PieChartProps> = ({
 }) => {
   // theme
   const context = useThemeUI();
+  const [colorMode] = useColorMode();
   const { primary, text, highlight, purple, muted } = context.theme
     .rawColors as ExactTheme['rawColors'];
 
@@ -167,18 +167,22 @@ export const PieChart: FC<PieChartProps> = ({
     });
   };
 
-  const colorScale = useMemo(
-    () =>
-      scaleOrdinal<string>({
-        domain: data.map(getLabel),
-        range: data.map((el, i) =>
-          color(primary)
-            .lighten((i + 1) / data.length)
-            .hex()
-        ),
-      }),
-    [data, primary]
-  );
+  const colorScale = useMemo(() => {
+    const extractDark = (i) =>
+      color(primary)
+        .darken((i + 1) / data.length)
+        .hex();
+    const extractLight = (i) =>
+      color(primary)
+        .lighten((i + 1) / data.length)
+        .hex();
+    return scaleOrdinal<string>({
+      domain: data.map(getLabel),
+      range: data.map((el, i) =>
+        colorMode === 'dark' ? extractDark(i) : extractLight(i)
+      ),
+    });
+  }, [data, primary, colorMode]);
 
   return (
     <TitleWrapper title={title}>

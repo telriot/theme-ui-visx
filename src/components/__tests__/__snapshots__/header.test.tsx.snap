@@ -47,7 +47,7 @@ exports[`Header should match snapshot 1`] = `
   color: var(--theme-ui-colors-primary);
 }
 
-.emotion-4 {
+.emotion-5 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -75,7 +75,7 @@ exports[`Header should match snapshot 1`] = `
   margin-left: auto;
 }
 
-.emotion-4:hover {
+.emotion-5:hover {
   background-color: var(--theme-ui-colors-secondary);
 }
 
@@ -98,8 +98,14 @@ exports[`Header should match snapshot 1`] = `
       >
         Charts
       </a>
+      <a
+        class="emotion-2"
+        href="/spring-playground"
+      >
+        Spring Playground
+      </a>
       <button
-        class="emotion-4"
+        class="emotion-5"
       >
         Light
       </button>
