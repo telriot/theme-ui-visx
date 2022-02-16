@@ -1,8 +1,9 @@
 /* eslint-disable react/jsx-pascal-case */
 import { Themed } from 'theme-ui';
 import { TypeScale, TypeStyle, ColorPalette } from '@theme-ui/style-guide';
+import { NextPage } from 'next';
 
-const StyleGuidePage = () => (
+const StyleGuidePage: NextPage = () => (
   <>
     <Themed.h1>Style Guide</Themed.h1>
     <Themed.h2>Color Palette</Themed.h2>

@@ -1,8 +1,13 @@
 import Link from 'next/link';
 import { useColorMode, Container, Flex, NavLink, Button } from 'theme-ui';
+import { useHasMounted } from 'src/hooks';
 
 export default function Header() {
   const [colorMode, setColorMode] = useColorMode();
+  const handleThemeChange = () =>
+    setColorMode(colorMode === 'light' ? 'dark' : 'light');
+  const hasMounted = useHasMounted();
+  const btnText = !hasMounted || colorMode === 'light' ? 'Dark' : 'Light';
   return (
     // see theme.layout.container for styles
     <Container as="header">
@@ -14,11 +19,11 @@ export default function Header() {
         <Link href="/style" passHref>
           <NavLink p={2}>Style Guide</NavLink>
         </Link>
-        <Button
-          ml="auto"
-          onClick={() => setColorMode(colorMode === 'light' ? 'dark' : 'light')}
-        >
-          Toggle {colorMode === 'light' ? 'Dark' : 'Light'}
+        <Link href="/test-page" passHref>
+          <NavLink p={2}>Test Page</NavLink>
+        </Link>
+        <Button ml="auto" onClick={handleThemeChange}>
+          {btnText}
         </Button>
       </Flex>
     </Container>
