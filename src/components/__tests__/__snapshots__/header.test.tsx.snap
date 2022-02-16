@@ -47,7 +47,7 @@ exports[`Header should match snapshot 1`] = `
   color: var(--theme-ui-colors-primary);
 }
 
-.emotion-5 {
+.emotion-4 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -75,7 +75,7 @@ exports[`Header should match snapshot 1`] = `
   margin-left: auto;
 }
 
-.emotion-5:hover {
+.emotion-4:hover {
   background-color: var(--theme-ui-colors-secondary);
 }
 
@@ -94,18 +94,12 @@ exports[`Header should match snapshot 1`] = `
       </a>
       <a
         class="emotion-2"
-        href="/style"
+        href="/charts"
       >
-        Style Guide
-      </a>
-      <a
-        class="emotion-2"
-        href="/test-page"
-      >
-        Test Page
+        Charts
       </a>
       <button
-        class="emotion-5"
+        class="emotion-4"
       >
         Light
       </button>

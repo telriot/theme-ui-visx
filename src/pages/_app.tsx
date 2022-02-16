@@ -2,7 +2,7 @@ import App from 'next/app';
 import { ThemeProvider, Container } from 'theme-ui';
 import NProgress from 'next-nprogress-emotion';
 
-import Header from 'src/components/Header';
+import Header from 'src/components/layout/Header';
 import theme from 'src/theme';
 
 class MyApp extends App {

@@ -4,7 +4,7 @@ import {
   useResizeObserver,
   useXDragAndZoom,
 } from 'src/hooks';
-import { formatToMDY, getLabel, getValue,largeIntToAbbr } from 'src/utils';
+import { formatToMDY, getLabel, getValue, largeIntToAbbr } from 'src/utils';
 import { Bar } from '@visx/shape';
 import { Group } from '@visx/group';
 import { LinearGradient } from '@visx/gradient';

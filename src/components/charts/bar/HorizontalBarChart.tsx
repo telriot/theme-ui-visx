@@ -1,10 +1,6 @@
 import { FC, useMemo, useRef } from 'react';
-import {
-  useKeyDownListener,
-  useResizeObserver,
-  useXDragAndZoom,
-} from 'src/hooks';
-import { largeIntToAbbr, getLabel, getValue } from 'src/utils';
+import { useResizeObserver } from 'src/hooks';
+import { getLabel, getValue, largeIntToAbbr } from 'src/utils';
 import { Bar } from '@visx/shape';
 import { Group } from '@visx/group';
 import { LinearGradient } from '@visx/gradient';
@@ -78,7 +74,7 @@ export const HorizontalBarChart: FC<HorizontalBarChartProps> = ({
       tooltipData: (
         <div>
           <div>Year: {datum.label}</div>
-          <div>Population: {largeIntToAbbr(datum.value)}</div>
+          <div>Population: {datum.getAbbrValue()}</div>
         </div>
       ),
     });

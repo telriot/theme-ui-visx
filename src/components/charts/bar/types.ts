@@ -1,10 +1,6 @@
-import { IBaseDataPoint } from 'types';
+import { SingleSeriesChartProps } from '../types';
 
-export interface BarChartProps {
-  data: IBaseDataPoint[];
-  title?: string;
-  height?: number;
-  width?: number;
+export interface BarChartProps extends SingleSeriesChartProps {
   my?: number;
   mx?: number;
 }
