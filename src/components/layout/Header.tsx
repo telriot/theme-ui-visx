@@ -12,6 +12,7 @@ export default function Header() {
     { href: '/', label: 'Home' },
     { href: '/charts', label: 'Charts' },
     { href: '/spring-playground', label: 'Spring Playground' },
+    { href: '/modal-drilldown', label: 'Modal Drilldown' },
   ];
   return (
     // see theme.layout.container for styles

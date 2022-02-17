@@ -1,12 +1,11 @@
-import React, { FC, useState, useMemo, useRef } from 'react';
-import Pie, { ProvidedProps, PieArcDatum } from '@visx/shape/lib/shapes/Pie';
+import { FC, useMemo, useRef } from 'react';
+import Pie from '@visx/shape/lib/shapes/Pie';
 import { scaleOrdinal } from '@visx/scale';
-import { BaseDataPoint, getLabel, getValue, largeIntToAbbr } from 'src/utils';
+import { BaseDataPoint, getLabel, getValue } from 'src/utils';
 import { Group } from '@visx/group';
 import { LinearGradient } from '@visx/gradient';
 import { useResizeObserver } from 'src/hooks';
 import color from 'color';
-import { animated, useTransition, interpolate } from 'react-spring';
 import { useTooltip, useTooltipInPortal, defaultStyles } from '@visx/tooltip';
 import { localPoint } from '@visx/event';
 import { useThemeUI, useColorMode } from 'theme-ui';
@@ -14,108 +13,19 @@ import { ExactTheme } from 'src/theme';
 import { IBaseDataPoint } from 'types';
 import { PieChartProps } from './types';
 import { SizeWrapper, TitleWrapper } from '../wrappers';
-
-// react-spring transition definitions
-type AnimatedStyles = { startAngle: number; endAngle: number; opacity: number };
-
-const fromLeaveTransition = ({ endAngle }: PieArcDatum<any>) => ({
-  // enter from 360° if end angle is > 180°
-  startAngle: endAngle > Math.PI ? 2 * Math.PI : 0,
-  endAngle: endAngle > Math.PI ? 2 * Math.PI : 0,
-  opacity: 0,
-});
-
-const enterUpdateTransition = ({ startAngle, endAngle }: PieArcDatum<any>) => ({
-  startAngle,
-  endAngle,
-  opacity: 1,
-});
-
-type AnimatedPieProps<Datum> = ProvidedProps<Datum> & {
-  getKey: (d: PieArcDatum<Datum>) => string;
-  getColor: (d: PieArcDatum<Datum>) => string;
-  onClickDatum: (d: PieArcDatum<Datum>) => void;
-  onMouseOver: (e: any, d: Datum) => void;
-  onMouseLeave: VoidFunction;
-
-  delay?: number;
-};
-
-const AnimatedPie: FC<AnimatedPieProps<BaseDataPoint>> = ({
-  arcs,
-  path,
-  getKey,
-  getColor,
-  onClickDatum,
-  onMouseLeave,
-  onMouseOver,
-}) => {
-  const context = useThemeUI();
-
-  const { text } = context.theme.rawColors as ExactTheme['rawColors'];
-  const transitions = useTransition<PieArcDatum<BaseDataPoint>, AnimatedStyles>(
-    arcs,
-    {
-      from: fromLeaveTransition,
-      enter: enterUpdateTransition,
-      update: enterUpdateTransition,
-      leave: fromLeaveTransition,
-      keys: getKey,
-    }
-  );
-  return transitions((props, arc, { key }) => {
-    const [centroidX, centroidY] = path.centroid(arc);
-    const hasSpaceForLabel = arc.endAngle - arc.startAngle >= 0.1;
-
-    return (
-      <g key={key}>
-        <animated.path
-          // compute interpolated path d attribute from intermediate angle values
-          d={interpolate(
-            [props.startAngle, props.endAngle],
-            (startAngle, endAngle) =>
-              path({
-                ...arc,
-                startAngle,
-                endAngle,
-              })
-          )}
-          fill={getColor(arc)}
-          onClick={() => onClickDatum(arc)}
-          onTouchStart={() => onClickDatum(arc)}
-          onMouseLeave={onMouseLeave}
-          onMouseOver={(e) => onMouseOver(e, arc.data)}
-        />
-        {hasSpaceForLabel && (
-          <animated.g style={{ opacity: props.opacity }}>
-            <text
-              fill={text}
-              x={centroidX}
-              y={centroidY}
-              dy=".33em"
-              fontSize={11}
-              textAnchor="middle"
-              pointerEvents="none"
-            >
-              {getKey(arc)}
-            </text>
-          </animated.g>
-        )}
-      </g>
-    );
-  });
-};
+import { AnimatedPie } from './shared/AnimatedPie';
 
 export const PieChart: FC<PieChartProps> = ({
   data,
   title,
+  onClickDatum,
   padding = 50,
   ...props
 }) => {
   // theme
   const context = useThemeUI();
   const [colorMode] = useColorMode();
-  const { primary, text, highlight, purple, muted } = context.theme
+  const { primary, text, highlight, muted } = context.theme
     .rawColors as ExactTheme['rawColors'];
 
   // dimensions
@@ -161,28 +71,31 @@ export const PieChart: FC<PieChartProps> = ({
       tooltipData: (
         <div>
           <div>Cause: {datum.label}</div>
-          <div>Delayed flights:{datum.getAbbrValue()}</div>
+          <div>Delayed flights: {datum.getAbbrValue()}</div>
         </div>
       ),
     });
   };
 
   const colorScale = useMemo(() => {
-    const extractDark = (i) =>
+    const extractDark = (i: number) =>
       color(primary)
         .darken((i + 1) / data.length)
         .hex();
-    const extractLight = (i) =>
+    const extractLight = (i: number) =>
       color(primary)
         .lighten((i + 1) / data.length)
         .hex();
     return scaleOrdinal<string>({
       domain: data.map(getLabel),
-      range: data.map((el, i) =>
+      range: data.map((_, i) =>
         colorMode === 'dark' ? extractDark(i) : extractLight(i)
       ),
     });
   }, [data, primary, colorMode]);
+
+  const handleClickDatum =
+    typeof onClickDatum !== 'undefined' ? onClickDatum : () => null;
 
   return (
     <TitleWrapper title={title}>
@@ -201,7 +114,7 @@ export const PieChart: FC<PieChartProps> = ({
                 <AnimatedPie
                   {...pie}
                   getKey={(arc) => getLabel(arc.data)}
-                  onClickDatum={() => null}
+                  onClickDatum={handleClickDatum}
                   getColor={(arc) => colorScale(getLabel(arc.data)) as string}
                   onMouseLeave={handleTooltipLeave}
                   onMouseOver={handleTooltipMouseOver}

@@ -47,7 +47,7 @@ exports[`Header should match snapshot 1`] = `
   color: var(--theme-ui-colors-primary);
 }
 
-.emotion-5 {
+.emotion-6 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -75,7 +75,7 @@ exports[`Header should match snapshot 1`] = `
   margin-left: auto;
 }
 
-.emotion-5:hover {
+.emotion-6:hover {
   background-color: var(--theme-ui-colors-secondary);
 }
 
@@ -104,8 +104,14 @@ exports[`Header should match snapshot 1`] = `
       >
         Spring Playground
       </a>
+      <a
+        class="emotion-2"
+        href="/modal-drilldown"
+      >
+        Modal Drilldown
+      </a>
       <button
-        class="emotion-5"
+        class="emotion-6"
       >
         Light
       </button>
