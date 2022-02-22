@@ -6,6 +6,7 @@ const makeTheme = <T extends Theme>(t: T) => t;
 
 const theme = makeTheme({
   ...swiss,
+  breakpoints: ['20em', '40em', '48em', '64em', '80em', '96em'],
   colors: {
     ...swiss.colors,
     modes: {
@@ -50,6 +51,13 @@ const theme = makeTheme({
     nav: {
       fontFamily: 'body',
     },
+  },
+  zIndices: {
+    base: 1000,
+    popup: 1010,
+    'modal-overlay': 1020,
+    modal: 1030,
+    top: 1100,
   },
 });
 

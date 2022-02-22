@@ -65,7 +65,7 @@ const TestPage: NextPage = () => {
       </Head>
       <Heading mb="3">Chart testing</Heading>
       <Flex py="2" sx={{ flexDirection: 'column' }}>
-        <Grid gap={4} columns={[2]}>
+        <Grid gap={4} columns={[1, 1, 1, 2]}>
           <Box mb={4} sx={{ flex: 1 }}>
             <DonutChart
               title="Flight status at arrival"
@@ -83,18 +83,30 @@ const TestPage: NextPage = () => {
           </Box>
         </Grid>
 
-        <Box mb={4}>
+        <Box
+          mb={4}
+          sx={{
+            height: ['250px', '350px', null, '450px'],
+            minHeight: ['250px', '350px', null, '450px'],
+            flex: 1,
+          }}
+        >
           <HorizontalBarChart
             title="Indian Population Fluctuation"
             data={mappedIndianPopulation}
-            height={300}
           />
         </Box>
-        <Box mb={4}>
+        <Box
+          mb={4}
+          sx={{
+            height: ['250px', '350px', null, '450px'],
+            minHeight: ['250px', '350px', null, '450px'],
+            flex: 1,
+          }}
+        >
           <VerticalBarChart
             title="Apple Stock Fluctuation"
             data={mappedAppleStock}
-            height={300}
             xScaleType="date"
           />
         </Box>

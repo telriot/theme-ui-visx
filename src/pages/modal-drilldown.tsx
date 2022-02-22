@@ -4,7 +4,7 @@ import Head from 'next/head';
 import { Box } from 'theme-ui';
 import { PieArcDatum } from '@visx/shape/lib/shapes/Pie';
 import aircraftDelayData from 'src/assets/airlines.json';
-import { Delays, NumberOfDelays } from 'src/assets/types';
+import { Delays } from 'src/assets/types';
 import { BaseDataPoint, camelToTitleCase } from 'src/utils';
 import { DonutChart } from 'src/components/charts/pie';
 import { VerticalBarChart } from 'src/components/charts/bar';
@@ -65,8 +65,6 @@ const ModalDrilldownDonut: NextPage = () => {
     }),
     [getStatusByAirport]
   );
-
-  console.log(drilldownData);
 
   const handleClick = (datum: PieArcDatum<BaseDataPoint>) => {
     const getTarget = (label: string) => {

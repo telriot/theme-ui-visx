@@ -39,7 +39,7 @@ export const Modal: FC<ModalProps> = ({ children, isOpen, onClose }) => {
             display: 'grid',
             placeItems: 'center',
             padding: 3,
-            zIndex: 1000,
+            zIndex: 'modal-overlay',
             bg: transparentize('purple', isOpen ? 0.7 : 1),
             pointerEvents: isOpen ? 'auto' : 'none',
           }}
@@ -55,7 +55,7 @@ export const Modal: FC<ModalProps> = ({ children, isOpen, onClose }) => {
             onKeyUp={handleEscape}
             tabIndex={-1}
             sx={{
-              zIndex: 1100,
+              zIndex: 'modal',
               opacity: isOpen ? 1 : 0,
             }}
           >

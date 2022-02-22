@@ -41,10 +41,10 @@ export const VerticalBarChart: FC<VerticalBarChartProps> = ({
   const dimensions = useResizeObserver(wrapperRef);
   const width = props.width || dimensions?.width || 0;
   const height = props.height || dimensions?.height || 0;
-
   // bounds
   const xMax = Math.max(0, width - mx);
   const yMax = Math.max(0, height - my);
+  console.log(height, yMax);
 
   // use x range hook
   const isShiftDown = useKeyDownListener('Shift');
@@ -128,7 +128,7 @@ export const VerticalBarChart: FC<VerticalBarChartProps> = ({
 
   return (
     <TitleWrapper title={title}>
-      <SizeWrapper height={height} ref={wrapperRef}>
+      <SizeWrapper ref={wrapperRef}>
         <svg ref={tooltipContainerRef} width="100%" height="100%">
           <LinearGradient from={muted} to={highlight} id="bgGradient" />
           <rect width={width} height={height} fill="url(#bgGradient)" rx={14} />
@@ -137,7 +137,7 @@ export const VerticalBarChart: FC<VerticalBarChartProps> = ({
             <RectClipPath id="zoom-clip" width={xMax} height={yMax + 40} />
 
             <Group
-              style={{ transform: `translateX(${xTranslation}px)` }}
+              sx={{ transform: `translateX(${xTranslation}px)` }}
               width={xMax}
               height={yMax}
             >
@@ -155,14 +155,14 @@ export const VerticalBarChart: FC<VerticalBarChartProps> = ({
                     width={barWidth}
                     height={barHeight}
                     fill={colorScale(d.value)}
-                    style={{ transition: 'width .4s .4s' }}
+                    sx={{ transition: 'width .4s .4s' }}
                     onMouseOver={(e) => handleTooltipMouseOver(e, d)}
                     onMouseLeave={handleTooltipLeave}
                   />
                 );
               })}
             </Group>
-            <Group style={{ transform: `translateX(${xTranslation}px)` }}>
+            <Group sx={{ transform: `translateX(${xTranslation}px)` }}>
               <AxisBottom
                 top={yMax}
                 scale={xScale}
@@ -193,7 +193,7 @@ export const VerticalBarChart: FC<VerticalBarChartProps> = ({
                   width={xMax}
                   height={yMax}
                   rx={14}
-                  style={{
+                  sx={{
                     cursor: isShiftDown
                       ? isDragging
                         ? 'grabbing'
@@ -238,12 +238,12 @@ export const VerticalBarChart: FC<VerticalBarChartProps> = ({
             key={Math.random()}
             top={tooltipTop}
             left={tooltipLeft}
-            style={{
+            sx={{
               ...defaultStyles,
               background: muted,
               color: text,
               textAlign: 'center',
-              zIndex: 100000000,
+              zIndex: 'top',
             }}
           >
             {tooltipData}

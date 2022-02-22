@@ -102,18 +102,14 @@ export const HorizontalBarChart: FC<HorizontalBarChartProps> = ({
 
   return (
     <TitleWrapper title={title}>
-      <SizeWrapper height={height} ref={wrapperRef}>
+      <SizeWrapper ref={wrapperRef}>
         <svg ref={tooltipContainerRef} width="100%" height="100%">
           <LinearGradient from={muted} to={highlight} id="bgGradient" />
           <rect width={width} height={height} fill="url(#bgGradient)" rx={14} />
 
           <Group top={my / 2} left={mx / 2} clipPath="url(#zoom-clip)">
             <RectClipPath id="zoom-clip" width={xMax} height={yMax + 40} />
-            <Group
-              // style={{ transform: `translateX(${xTranslation}px)` }}
-              width={xMax}
-              height={yMax}
-            >
+            <Group width={xMax} height={yMax}>
               {data.map((d) => {
                 const label = getLabel(d);
                 const barWidth = xScale(d.value);
@@ -128,7 +124,7 @@ export const HorizontalBarChart: FC<HorizontalBarChartProps> = ({
                     width={barWidth}
                     height={barHeight}
                     fill={primary}
-                    style={{ transition: 'width .4s' }}
+                    sx={{ transition: 'width .4s' }}
                     onMouseOver={(e) => handleTooltipMouseOver(e, d)}
                     onMouseLeave={handleTooltipLeave}
                   />
@@ -178,7 +174,7 @@ export const HorizontalBarChart: FC<HorizontalBarChartProps> = ({
             key={Math.random()}
             top={tooltipTop}
             left={tooltipLeft}
-            style={{
+            sx={{
               ...defaultStyles,
               background: muted,
               color: text,

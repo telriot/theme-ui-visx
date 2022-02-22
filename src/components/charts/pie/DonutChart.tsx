@@ -134,7 +134,7 @@ export const DonutChart: FC<DonutChartProps> = ({
             key={Math.random()}
             top={tooltipTop}
             left={tooltipLeft}
-            style={{
+            sx={{
               ...defaultStyles,
               background: muted,
               color: text,
