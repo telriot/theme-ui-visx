@@ -15,7 +15,10 @@ export const SizeWrapper = forwardRef<HTMLDivElement, SizeWrapperRef>(
       ref={ref}
       px={px}
       py={py}
-      sx={{ height: `${height}px` || '100%', width: `${width}px` || '100%' }}
+      sx={{
+        height: height ? `${height}px` : '100%',
+        width: width ? `${width}px` : '100%',
+      }}
     >
       {children}
     </Box>

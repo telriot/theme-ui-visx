@@ -95,6 +95,7 @@ const TestPage: NextPage = () => {
             title="Apple Stock Fluctuation"
             data={mappedAppleStock}
             height={300}
+            xScaleType="date"
           />
         </Box>
       </Flex>

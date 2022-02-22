@@ -6,12 +6,12 @@ export interface TitleWrapperProps {
   children: ReactNode;
 }
 export const TitleWrapper: FC<TitleWrapperProps> = ({ title, children }) => (
-  <Box>
+  <Box sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
     {Boolean(title) && (
       <Heading mb={2} variant="subHeading">
         {title}
       </Heading>
     )}
-    {children}
+    <Box sx={{ flexGrow: 1 }}>{children}</Box>
   </Box>
 );

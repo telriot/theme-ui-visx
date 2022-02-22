@@ -28,6 +28,7 @@ export const VerticalBarChart: FC<VerticalBarChartProps> = ({
   title,
   mx = 100,
   my = 100,
+  xScaleType = 'string',
   ...props
 }) => {
   // theme
@@ -165,7 +166,7 @@ export const VerticalBarChart: FC<VerticalBarChartProps> = ({
               <AxisBottom
                 top={yMax}
                 scale={xScale}
-                tickFormat={formatToMDY}
+                tickFormat={xScaleType === 'date' ? formatToMDY : undefined}
                 stroke={text}
                 tickStroke={text}
                 tickLabelProps={() => ({
@@ -242,6 +243,7 @@ export const VerticalBarChart: FC<VerticalBarChartProps> = ({
               background: muted,
               color: text,
               textAlign: 'center',
+              zIndex: 100000000,
             }}
           >
             {tooltipData}
