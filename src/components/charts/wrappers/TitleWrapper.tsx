@@ -6,7 +6,7 @@ export interface TitleWrapperProps {
   children: ReactNode;
 }
 export const TitleWrapper: FC<TitleWrapperProps> = ({ title, children }) => (
-  <Box sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+  <Box data-testid='title-wrapper' sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
     {Boolean(title) && (
       <Heading mb={2} variant="subHeading">
         {title}

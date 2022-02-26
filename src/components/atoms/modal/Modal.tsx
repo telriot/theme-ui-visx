@@ -9,6 +9,15 @@ export interface ModalProps {
   onClose: () => void;
 }
 
+const baseOverlayStyles = {
+  position: 'fixed',
+  top: 0,
+  left: 0,
+  width: '100vw',
+  height: '100vh',
+  minHeight: '100vh',
+} as any;
+
 export const Modal: FC<ModalProps> = ({ children, isOpen, onClose }) => {
   const modalRef = useRef<HTMLDivElement>(null);
   const hasMounted = useHasMounted();
@@ -37,12 +46,7 @@ export const Modal: FC<ModalProps> = ({ children, isOpen, onClose }) => {
             role="presentation"
             style={springProps}
             sx={{
-              position: 'fixed',
-              top: 0,
-              left: 0,
-              width: '100vw',
-              height: '100vh',
-              minHeight: '100vh',
+              ...baseOverlayStyles,
               zIndex: 'modal-overlay',
               bg: 'purple',
               pointerEvents: isOpen ? 'auto' : 'none',
@@ -52,13 +56,9 @@ export const Modal: FC<ModalProps> = ({ children, isOpen, onClose }) => {
             tabIndex={-1}
           ></animated.div>
           <div
+            data-testid="modal-container"
             sx={{
-              position: 'fixed',
-              top: 0,
-              left: 0,
-              width: '100vw',
-              height: '100vh',
-              minHeight: '100vh',
+              ...baseOverlayStyles,
               display: 'grid',
               placeItems: 'center',
               padding: 3,

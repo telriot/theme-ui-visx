@@ -103,13 +103,15 @@ export const HorizontalBarChart: FC<HorizontalBarChartProps> = ({
       }),
     [yMax, data]
   );
+  console.log(data, 'DATA');
   return (
     <TitleWrapper title={title}>
       <SizeWrapper ref={wrapperRef}>
-        {!yScale.bandwidth() || !width ? null : (
+        {!width ? null : (
           <svg ref={tooltipContainerRef} width="100%" height="100%">
             <LinearGradient from={muted} to={highlight} id="bgGradient" />
             <rect
+              data-testid="chart-bg"
               width={width}
               height={height}
               fill="url(#bgGradient)"
@@ -182,6 +184,7 @@ export const HorizontalBarChart: FC<HorizontalBarChartProps> = ({
         )}
         {tooltipOpen && (
           <TooltipInPortal
+            data-testid="portal-tooltip"
             // set this to random so it correctly updates with parent bounds
             key={Math.random()}
             top={tooltipTop}

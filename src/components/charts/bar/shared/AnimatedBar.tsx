@@ -12,8 +12,8 @@ interface AnimatedBarProps extends IBarPathArgs {
   datum: IBaseDataPoint;
   label: string;
   fill: string;
-  onMouseOver: (e: MouseEvent, d: IBaseDataPoint) => void;
-  onMouseLeave: VoidFunction;
+  onMouseOver?: (e: MouseEvent, d: IBaseDataPoint) => void;
+  onMouseLeave?: VoidFunction;
   direction?: 'vertical' | 'horizontal';
 }
 
@@ -35,8 +35,14 @@ export const AnimatedBar: FC<AnimatedBarProps> = ({
     delay: 200,
   });
 
+  const handleMouseOver =
+    typeof onMouseOver !== 'undefined'
+      ? (e: MouseEvent) => onMouseOver(e, datum)
+      : () => null;
+
   return height && width ? (
     <animated.rect
+      data-testid="animated-bar"
       key={`bar-${label}`}
       fill={fill}
       x={x}
@@ -44,7 +50,7 @@ export const AnimatedBar: FC<AnimatedBarProps> = ({
       width={width}
       height={height}
       style={springProps}
-      onMouseEnter={(e) => onMouseOver(e, datum)}
+      onMouseOver={handleMouseOver}
       onMouseLeave={onMouseLeave}
     />
   ) : null;

@@ -12,6 +12,7 @@ export interface SizeWrapperRef {
 export const SizeWrapper = forwardRef<HTMLDivElement, SizeWrapperRef>(
   ({ children, height, width, px = 0, py = 0 }, ref) => (
     <Box
+      data-testid="size-wrapper"
       ref={ref}
       px={px}
       py={py}
