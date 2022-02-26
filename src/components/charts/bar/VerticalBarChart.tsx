@@ -5,7 +5,6 @@ import {
   useXDragAndZoom,
 } from 'src/hooks';
 import { formatToMDY, getLabel, getValue, largeIntToAbbr } from 'src/utils';
-import { Bar } from '@visx/shape';
 import { Group } from '@visx/group';
 import { LinearGradient } from '@visx/gradient';
 import { scaleBand, scaleLinear } from '@visx/scale';
@@ -19,6 +18,7 @@ import { ExactTheme } from 'src/theme';
 import { IBaseDataPoint } from 'types';
 import { SizeWrapper, TitleWrapper } from '../wrappers';
 import { BarChartProps } from './types';
+import { AnimatedBar } from './shared/AnimatedBar';
 
 export interface VerticalBarChartProps extends BarChartProps {
   className?: string;
@@ -44,7 +44,6 @@ export const VerticalBarChart: FC<VerticalBarChartProps> = ({
   // bounds
   const xMax = Math.max(0, width - mx);
   const yMax = Math.max(0, height - my);
-  console.log(height, yMax);
 
   // use x range hook
   const isShiftDown = useKeyDownListener('Shift');
@@ -129,109 +128,125 @@ export const VerticalBarChart: FC<VerticalBarChartProps> = ({
   return (
     <TitleWrapper title={title}>
       <SizeWrapper ref={wrapperRef}>
-        <svg ref={tooltipContainerRef} width="100%" height="100%">
-          <LinearGradient from={muted} to={highlight} id="bgGradient" />
-          <rect width={width} height={height} fill="url(#bgGradient)" rx={14} />
+        {!xScale.bandwidth() || !width ? null : (
+          <svg ref={tooltipContainerRef} width="100%" height="100%">
+            <LinearGradient from={muted} to={highlight} id="bgGradient" />
+            <rect
+              width={width}
+              height={height}
+              fill="url(#bgGradient)"
+              rx={14}
+            />
 
-          <Group top={my / 2} left={mx / 2} clipPath="url(#zoom-clip)">
-            <RectClipPath id="zoom-clip" width={xMax} height={yMax + 40} />
+            <Group top={my / 2} left={mx / 2} clipPath="url(#zoom-clip)">
+              <RectClipPath id="zoom-clip" width={xMax} height={yMax + 40} />
 
-            <Group
-              sx={{ transform: `translateX(${xTranslation}px)` }}
-              width={xMax}
-              height={yMax}
-            >
-              {data.map((d) => {
-                const label = getLabel(d);
-                const barWidth = xScale.bandwidth();
-                const barHeight = yMax - (yScale(getValue(d)) ?? 0);
-                const barX = xScale(d.label);
-                const barY = yMax - barHeight;
-                return (
-                  <Bar
-                    key={`bar-${label}`}
-                    x={barX}
-                    y={barY}
-                    width={barWidth}
-                    height={barHeight}
-                    fill={colorScale(d.value)}
-                    sx={{ transition: 'width .4s .4s' }}
-                    onMouseOver={(e) => handleTooltipMouseOver(e, d)}
-                    onMouseLeave={handleTooltipLeave}
-                  />
-                );
-              })}
-            </Group>
-            <Group sx={{ transform: `translateX(${xTranslation}px)` }}>
-              <AxisBottom
-                top={yMax}
-                scale={xScale}
-                tickFormat={xScaleType === 'date' ? formatToMDY : undefined}
-                stroke={text}
-                tickStroke={text}
-                tickLabelProps={() => ({
-                  fill: text,
-                  fontSize: 11,
-                  textAnchor: 'middle',
-                  dy: 4,
-                })}
-                hideZero
-                tickLength={4}
-                numTicks={numTicks || 10}
-              />
-            </Group>
-            <Drag
-              key={`drag-area`}
-              width={xMax}
-              height={yMax}
-              onDragMove={handleDragMove}
-              onDragEnd={handleDragEnd}
-              resetOnStart
-            >
-              {({ dragStart, dragEnd, dragMove, isDragging }) => (
-                <rect
-                  width={xMax}
-                  height={yMax}
-                  rx={14}
-                  sx={{
-                    cursor: isShiftDown
-                      ? isDragging
-                        ? 'grabbing'
-                        : 'grab'
-                      : 'default',
-                    pointerEvents: isShiftDown ? 'all' : 'none',
+              <Group
+                sx={{
+                  transform: `translateX(${xTranslation}px)`,
+                }}
+                width={xMax}
+                height={yMax}
+              >
+                <Group
+                  style={{
+                    transform: `rotateX(180deg) translateY(-${yMax}px)`,
                   }}
-                  fill="transparent"
-                  onMouseMove={dragMove}
-                  onMouseUp={dragEnd}
-                  onMouseDown={dragStart}
-                  onMouseOut={dragEnd}
-                  onTouchStart={dragStart}
-                  onTouchMove={dragMove}
-                  onTouchEnd={dragEnd}
-                  onWheel={handleWheelZoom}
+                >
+                  {data.map((d) => {
+                    const label = getLabel(d);
+                    const barWidth = xScale.bandwidth();
+                    const barHeight = yMax - (yScale(getValue(d)) ?? 0);
+                    const barX = xScale(d.label);
+                    return (
+                      <AnimatedBar
+                        key={`bar-${label}`}
+                        x={barX}
+                        y={0}
+                        width={barWidth}
+                        height={barHeight}
+                        fill={colorScale(d.value)}
+                        label={label}
+                        datum={d}
+                        onMouseOver={(e) => handleTooltipMouseOver(e, d)}
+                        onMouseLeave={handleTooltipLeave}
+                      />
+                    );
+                  })}
+                </Group>
+                <Group
+                  sx={{ transform: `translateX(${xTranslation}px)` }}
+                ></Group>
+                <AxisBottom
+                  top={yMax}
+                  scale={xScale}
+                  tickFormat={xScaleType === 'date' ? formatToMDY : undefined}
+                  stroke={text}
+                  tickStroke={text}
+                  tickLabelProps={() => ({
+                    fill: text,
+                    fontSize: 11,
+                    textAnchor: 'middle',
+                    dy: 4,
+                  })}
+                  hideZero
+                  tickLength={4}
+                  numTicks={numTicks || 10}
                 />
-              )}
-            </Drag>
-          </Group>
+              </Group>
+              <Drag
+                key={`drag-area`}
+                width={xMax}
+                height={yMax}
+                onDragMove={handleDragMove}
+                onDragEnd={handleDragEnd}
+                resetOnStart
+              >
+                {({ dragStart, dragEnd, dragMove, isDragging }) => (
+                  <rect
+                    width={xMax}
+                    height={yMax}
+                    rx={14}
+                    sx={{
+                      cursor: isShiftDown
+                        ? isDragging
+                          ? 'grabbing'
+                          : 'grab'
+                        : 'default',
+                      pointerEvents: isShiftDown ? 'all' : 'none',
+                    }}
+                    fill="transparent"
+                    onMouseMove={dragMove}
+                    onMouseUp={dragEnd}
+                    onMouseDown={dragStart}
+                    onMouseOut={dragEnd}
+                    onTouchStart={dragStart}
+                    onTouchMove={dragMove}
+                    onTouchEnd={dragEnd}
+                    onWheel={handleWheelZoom}
+                  />
+                )}
+              </Drag>
+            </Group>
 
-          <AxisLeft
-            left={mx / 2}
-            top={my / 2}
-            scale={yScale}
-            labelOffset={100}
-            stroke={text}
-            tickFormat={(value) => largeIntToAbbr(value as number)}
-            tickStroke={text}
-            tickLabelProps={() => ({
-              fill: text,
-              fontSize: 11,
-              dx: -25,
-            })}
-            hideZero
-            tickLength={4}
-          />
-        </svg>
+            <AxisLeft
+              left={mx / 2}
+              top={my / 2}
+              scale={yScale}
+              labelOffset={100}
+              stroke={text}
+              tickFormat={(value) => largeIntToAbbr(value as number)}
+              tickStroke={text}
+              tickLabelProps={() => ({
+                fill: text,
+                fontSize: 11,
+                dx: -25,
+              })}
+              hideZero
+              tickLength={4}
+            />
+          </svg>
+        )}
         {tooltipOpen && (
           <TooltipInPortal
             // set this to random so it correctly updates with parent bounds

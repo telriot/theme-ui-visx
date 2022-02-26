@@ -53,6 +53,7 @@ const theme = makeTheme({
     },
   },
   zIndices: {
+    hidden: -1,
     base: 1000,
     popup: 1010,
     'modal-overlay': 1020,

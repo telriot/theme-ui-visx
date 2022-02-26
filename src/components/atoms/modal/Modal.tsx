@@ -1,7 +1,7 @@
 import React, { FC, MouseEvent, KeyboardEvent, useRef, useEffect } from 'react';
 import { useHasMounted, usePortal } from 'src/hooks';
-import { transparentize } from '@theme-ui/color';
 import ReactDOM from 'react-dom';
+import { useSpring, animated } from 'react-spring';
 
 export interface ModalProps {
   children: React.ReactNode;
@@ -13,6 +13,10 @@ export const Modal: FC<ModalProps> = ({ children, isOpen, onClose }) => {
   const modalRef = useRef<HTMLDivElement>(null);
   const hasMounted = useHasMounted();
   const portal = usePortal(typeof document !== 'undefined' ? document : null);
+  const springProps = useSpring({
+    to: { opacity: isOpen ? 1 : 0 },
+    from: { opacity: 0 },
+  });
   useEffect(() => {
     if (isOpen && modalRef.current) {
       modalRef.current.focus({ preventScroll: true });
@@ -27,9 +31,10 @@ export const Modal: FC<ModalProps> = ({ children, isOpen, onClose }) => {
   return (
     <>
       {ReactDOM.createPortal(
-        <div
+        <animated.div
           data-testid="modal-overlay"
           role="presentation"
+          style={springProps}
           sx={{
             position: 'fixed',
             top: 0,
@@ -39,8 +44,9 @@ export const Modal: FC<ModalProps> = ({ children, isOpen, onClose }) => {
             display: 'grid',
             placeItems: 'center',
             padding: 3,
-            zIndex: 'modal-overlay',
-            bg: transparentize('purple', isOpen ? 0.7 : 1),
+            zIndex: isOpen ? 'modal-overlay' : 'hidden',
+            bg: 'purple',
+            // bg: transparentize('purple', isOpen ? 0.7 : 1),
             pointerEvents: isOpen ? 'auto' : 'none',
           }}
           onClick={onClose}
@@ -55,13 +61,13 @@ export const Modal: FC<ModalProps> = ({ children, isOpen, onClose }) => {
             onKeyUp={handleEscape}
             tabIndex={-1}
             sx={{
-              zIndex: 'modal',
+              zIndex: isOpen ? 'modal' : 'hidden',
               opacity: isOpen ? 1 : 0,
             }}
           >
             {children}
           </div>
-        </div>,
+        </animated.div>,
         portal
       )}
     </>

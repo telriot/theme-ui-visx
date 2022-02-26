@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { ProvidedProps, PieArcDatum } from '@visx/shape/lib/shapes/Pie';
 import { BaseDataPoint } from 'src/utils';
+import { Group } from '@visx/group';
 import { animated, useTransition, interpolate } from 'react-spring';
 import { useThemeUI } from 'theme-ui';
 import { ExactTheme } from 'src/theme';
@@ -57,7 +58,7 @@ export const AnimatedPie: FC<AnimatedPieProps<BaseDataPoint>> = ({
     const hasSpaceForLabel = arc.endAngle - arc.startAngle >= 0.1;
 
     return (
-      <g key={key}>
+      <Group key={key}>
         <animated.path
           // compute interpolated path d attribute from intermediate angle values
           d={interpolate(
@@ -90,7 +91,7 @@ export const AnimatedPie: FC<AnimatedPieProps<BaseDataPoint>> = ({
             </text>
           </animated.g>
         )}
-      </g>
+      </Group>
     );
   });
 };
