@@ -14,7 +14,7 @@ export const Modal: FC<ModalProps> = ({ children, isOpen, onClose }) => {
   const hasMounted = useHasMounted();
   const portal = usePortal(typeof document !== 'undefined' ? document : null);
   const springProps = useSpring({
-    to: { opacity: isOpen ? 1 : 0 },
+    to: { opacity: isOpen ? 0.6 : 0 },
     from: { opacity: 0 },
   });
   useEffect(() => {
@@ -31,43 +31,58 @@ export const Modal: FC<ModalProps> = ({ children, isOpen, onClose }) => {
   return (
     <>
       {ReactDOM.createPortal(
-        <animated.div
-          data-testid="modal-overlay"
-          role="presentation"
-          style={springProps}
-          sx={{
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            width: '100vw',
-            minHeight: '100vh',
-            display: 'grid',
-            placeItems: 'center',
-            padding: 3,
-            zIndex: isOpen ? 'modal-overlay' : 'hidden',
-            bg: 'purple',
-            // bg: transparentize('purple', isOpen ? 0.7 : 1),
-            pointerEvents: isOpen ? 'auto' : 'none',
-          }}
-          onClick={onClose}
-          onKeyUp={() => null}
-          tabIndex={-1}
-        >
-          <div
-            data-testid="modal"
-            ref={modalRef}
+        <>
+          <animated.div
+            data-testid="modal-overlay"
             role="presentation"
-            onClick={handleModalClick}
-            onKeyUp={handleEscape}
-            tabIndex={-1}
+            style={springProps}
             sx={{
-              zIndex: isOpen ? 'modal' : 'hidden',
-              opacity: isOpen ? 1 : 0,
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              width: '100vw',
+              height: '100vh',
+              minHeight: '100vh',
+              zIndex: 'modal-overlay',
+              bg: 'purple',
+              pointerEvents: isOpen ? 'auto' : 'none',
+            }}
+            onClick={onClose}
+            onKeyUp={() => null}
+            tabIndex={-1}
+          ></animated.div>
+          <div
+            sx={{
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              width: '100vw',
+              height: '100vh',
+              minHeight: '100vh',
+              display: 'grid',
+              placeItems: 'center',
+              padding: 3,
+              zIndex: 'modal',
+              pointerEvents: 'none',
             }}
           >
-            {children}
+            <div
+              data-testid="modal"
+              ref={modalRef}
+              role="presentation"
+              onClick={handleModalClick}
+              onKeyUp={handleEscape}
+              tabIndex={-1}
+              sx={{
+                zIndex: 'modal',
+                opacity: isOpen ? 1 : 0,
+                pointerEvents: isOpen ? 'auto' : 'none',
+              }}
+            >
+              {children}
+            </div>
           </div>
-        </animated.div>,
+        </>,
         portal
       )}
     </>
