@@ -4,6 +4,7 @@ import { Globals } from 'react-spring';
 import { BaseDataPoint } from 'src/utils';
 import { AnimatedBar } from '../AnimatedBar';
 
+
 Globals.assign({
   skipAnimation: true,
 });

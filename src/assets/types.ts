@@ -9,7 +9,7 @@ export interface Airport {
 export interface Time {
   label: string;
   month: number;
-  monthName: string;
+  monthName?: string;
   year: number;
 }
 

@@ -1,7 +1,7 @@
+/* eslint-disable sonarjs/no-nested-template-literals */
 import { magenta, cyan, blue, yellow, red, gray, green, bold } from 'colorette';
 import logLevel from 'loglevel';
 import prefix from 'loglevel-plugin-prefix';
-import { json } from 'stream/consumers';
 
 export const setupLogger = (): void => {
   const colors = {

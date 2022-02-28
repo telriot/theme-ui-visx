@@ -15,7 +15,7 @@ module.exports = {
     '*.test.tsx',
     '*.test.ts',
   ],
-  extends: ['airbnb-base', 'plugin:sonarjs/recommended', 'next'],
+  extends: ['airbnb-base', 'plugin:sonarjs/recommended', 'next', 'prettier'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 12,
@@ -37,5 +37,6 @@ module.exports = {
     'no-nested-ternary': 'off',
     'operator-linebreak': 'off',
     'no-confusing-arrow': 'off',
+    'spaced-comment': 'off',
   },
 };
