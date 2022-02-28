@@ -6,7 +6,6 @@ import {
 } from 'src/hooks';
 import { formatToMDY, getLabel, getValue, largeIntToAbbr } from 'src/utils';
 import { Group } from '@visx/group';
-import { LinearGradient } from '@visx/gradient';
 import { scaleBand, scaleLinear } from '@visx/scale';
 import { Drag } from '@visx/drag';
 import { useThemeUI } from 'theme-ui';
@@ -18,7 +17,7 @@ import { ExactTheme } from 'src/theme';
 import { IBaseDataPoint } from 'types';
 import { SizeWrapper, TitleWrapper } from '../wrappers';
 import { BarChartProps } from './types';
-import { AnimatedBar } from './shared/AnimatedBar';
+import { AnimatedBar, GradientBackground } from './shared';
 
 export interface VerticalBarChartProps extends BarChartProps {
   className?: string;
@@ -130,12 +129,11 @@ export const VerticalBarChart: FC<VerticalBarChartProps> = ({
       <SizeWrapper ref={wrapperRef}>
         {!xScale.bandwidth() || !width ? null : (
           <svg ref={tooltipContainerRef} width="100%" height="100%">
-            <LinearGradient from={muted} to={highlight} id="bgGradient" />
-            <rect
+            <GradientBackground
+              from={muted}
+              to={highlight}
               width={width}
               height={height}
-              fill="url(#bgGradient)"
-              rx={14}
             />
 
             <Group top={my / 2} left={mx / 2} clipPath="url(#zoom-clip)">
@@ -250,6 +248,7 @@ export const VerticalBarChart: FC<VerticalBarChartProps> = ({
         {tooltipOpen && (
           <TooltipInPortal
             // set this to random so it correctly updates with parent bounds
+            data-testid="portal-tooltip"
             key={Math.random()}
             top={tooltipTop}
             left={tooltipLeft}

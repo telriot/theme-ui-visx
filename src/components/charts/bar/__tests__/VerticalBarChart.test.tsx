@@ -1,9 +1,9 @@
 import { render, screen, waitForElementToBeRemoved } from 'test-utils';
 import userEvent from '@testing-library/user-event';
 import { Globals } from 'react-spring';
-import { HorizontalBarChart } from '../HorizontalBarChart';
+import { VerticalBarChart } from '../VerticalBarChart';
 import { BaseDataPoint } from 'src/utils';
-import { HorizontalBarChartProps } from '..';
+import { VerticalBarChartProps } from '..';
 
 Globals.assign({
   skipAnimation: true,
@@ -25,11 +25,11 @@ const baseProps = {
     ] as [number, string][]
   ).map((el) => new BaseDataPoint(...el)),
   xScaleType: 'string',
-} as HorizontalBarChartProps;
+} as VerticalBarChartProps;
 
-const View = () => <HorizontalBarChart {...baseProps} />;
+const View = () => <VerticalBarChart {...baseProps} />;
 
-describe('Horizontal Bar Chart with valid data', () => {
+describe('Vertical Bar Chart with valid data', () => {
   beforeEach(() => {
     render(<View />);
   });
