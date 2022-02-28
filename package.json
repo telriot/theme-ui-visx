@@ -9,14 +9,15 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint ./src",
+    "lint": "eslint ./src --fix",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "typecheck": "tsc --noEmit --pretty ",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "pre-commit": "lint-staged"
   },
   "dependencies": {
     "@mdx-js/loader": "^1.6.22",

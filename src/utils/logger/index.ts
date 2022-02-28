@@ -19,9 +19,9 @@ export const setupLogger = (): void => {
 
   prefix.apply(logLevel, {
     format(level, name, timestamp) {
-      return `${gray(`[${timestamp}]`)} ${colors[level.toUpperCase() as keyof typeof colors](level)} ${green(
-        `${name}:`
-      )}`;
+      return `${gray(`[${timestamp}]`)} ${colors[
+        level.toUpperCase() as keyof typeof colors
+      ](level)} ${green(`${name}:`)}`;
     },
   });
 
@@ -34,7 +34,8 @@ export const setupLogger = (): void => {
 
 function getCustomLogger() {
   setupLogger();
-  const parseArgs = (args: any[]) => args.map(arg=>JSON.stringify(arg)).join(' :: ');
+  const parseArgs = (args: any[]) =>
+    args.map((arg) => JSON.stringify(arg)).join(' :: ');
   return {
     trace: (...args: any[]) => logLevel.trace(parseArgs(args)),
     debug: (...args: any[]) => logLevel.debug(parseArgs(args)),
