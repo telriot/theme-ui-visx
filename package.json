@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "@mdx-js/loader": "^1.6.22",
-    "@next/mdx": "^12.0.10",
+    "@next/mdx": "^12.1.0",
     "@react-hook/throttle": "^2.2.0",
     "@theme-ui/color": "^0.13.1",
     "@theme-ui/css": "^0.12.1",
