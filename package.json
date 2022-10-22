@@ -32,7 +32,7 @@
     "colorette": "^2.0.16",
     "d3-scale-chromatic": "^3.0.0",
     "date-fns": "^2.29.3",
-    "eslint-config-prettier": "^8.3.0",
+    "eslint-config-prettier": "^8.5.0",
     "loglevel": "^1.8.0",
     "loglevel-plugin-prefix": "^0.8.4",
     "next": "^12.3.1",
