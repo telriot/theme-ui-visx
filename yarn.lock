@@ -1110,13 +1110,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/mdx@npm:^12.0.10":
-  version: 12.0.10
-  resolution: "@next/mdx@npm:12.0.10"
+"@next/mdx@npm:^12.3.1":
+  version: 12.3.1
+  resolution: "@next/mdx@npm:12.3.1"
   peerDependencies:
     "@mdx-js/loader": ">=0.15.0"
     "@mdx-js/react": "*"
-  checksum: a481ed39378552a2c19fb3da4cc46d0bc54ff5d95edbf911f488b0fe31df191b78dc7caa993840f12401c7321f6e404b7d1dfffe5e7aaf87a07e722110bb042c
+  checksum: ee103a80b7ee4a35b277bdaaff8e0d2bbd7f6429ef55d7f7480583734d3ae83386b62f19ba8c8d05c15203d24dd4d0dc75c4eb6c875f2e2be45e54a699bb084d
   languageName: node
   linkType: hard
 
@@ -9741,7 +9741,7 @@ __metadata:
     "@babel/core": ^7.17.2
     "@emotion/jest": ^11.10.0
     "@mdx-js/loader": ^1.6.22
-    "@next/mdx": ^12.0.10
+    "@next/mdx": ^12.3.1
     "@react-hook/throttle": ^2.2.0
     "@testing-library/cypress": ^8.0.2
     "@testing-library/jest-dom": ^5.16.2
