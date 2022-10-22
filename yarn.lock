@@ -450,6 +450,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/runtime@npm:^7.18.3":
+  version: 7.19.4
+  resolution: "@babel/runtime@npm:7.19.4"
+  dependencies:
+    regenerator-runtime: ^0.13.4
+  checksum: 66b7e3c13e9ee1d2c9397ea89144f29a875edee266a0eb2d9971be51b32fdbafc85808c7a45e011e6681899bb804b4e2ee2aed6dc07108dbbd6b11b6cc2afba6
+  languageName: node
+  linkType: hard
+
 "@babel/template@npm:^7.12.7, @babel/template@npm:^7.16.7, @babel/template@npm:^7.3.3":
   version: 7.16.7
   resolution: "@babel/template@npm:7.16.7"
@@ -567,13 +576,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@emotion/css-prettifier@npm:^1.0.1":
-  version: 1.0.1
-  resolution: "@emotion/css-prettifier@npm:1.0.1"
+"@emotion/css-prettifier@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "@emotion/css-prettifier@npm:1.1.0"
   dependencies:
-    "@emotion/memoize": ^0.7.4
+    "@emotion/memoize": ^0.8.0
     stylis: 4.0.13
-  checksum: 3c75e59b072fc4c6d1e555696ac01e41a02d29324c2e95795b6c1b2caae765f1967f561b64cf19522a06ec0d7bf89948ccf9ba8c000335a6693b6a4b43b74b92
+  checksum: 288873d5d662f8cd082fff6e4b24a3308443cb0b2cec0b2864be33168f94b673ba9a32d8ea37ee185fc7ab7cfb61eae78d05d907e6e92146fd0bc8631620ad36
   languageName: node
   linkType: hard
 
@@ -602,24 +611,24 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@emotion/jest@npm:^11.7.1":
-  version: 11.7.1
-  resolution: "@emotion/jest@npm:11.7.1"
+"@emotion/jest@npm:^11.10.0":
+  version: 11.10.0
+  resolution: "@emotion/jest@npm:11.10.0"
   dependencies:
-    "@babel/runtime": ^7.13.10
-    "@emotion/css-prettifier": ^1.0.1
+    "@babel/runtime": ^7.18.3
+    "@emotion/css-prettifier": ^1.1.0
     chalk: ^4.1.0
     specificity: ^0.4.1
     stylis: 4.0.13
   peerDependencies:
-    "@types/jest": ^26.0.14 || ^27.0.0
+    "@types/jest": ^26.0.14 || ^27.0.0 || ^28.0.0
     enzyme-to-json: ^3.2.1
   peerDependenciesMeta:
     "@types/jest":
       optional: true
     enzyme-to-json:
       optional: true
-  checksum: 27137da08156e0157402f86392bb924dcf6a366cfd7e94b9d8a5903bdbfe0e86a9c8832d6d933b8d2bda9933f469121cad7c4110f0a19085eb4b23bc2f407406
+  checksum: c5a848e40b5edf83644dbc4602c1c758e93cbf5c5869433b83e4376fe3967892d25e117bc316bd84b49ee6de1e699d2bfb45e6ef907be0c3ec0646ee2c28d59b
   languageName: node
   linkType: hard
 
@@ -634,6 +643,13 @@ __metadata:
   version: 0.7.5
   resolution: "@emotion/memoize@npm:0.7.5"
   checksum: 83da8d4a7649a92c72f960817692bc6be13cc13e107b9f7e878d63766525ed4402881bfeb3cda61145c050281e7e260f114a0a2870515527346f2ef896b915b3
+  languageName: node
+  linkType: hard
+
+"@emotion/memoize@npm:^0.8.0":
+  version: 0.8.0
+  resolution: "@emotion/memoize@npm:0.8.0"
+  checksum: c87bb110b829edd8e1c13b90a6bc37cebc39af29c7599a1e66a48e06f9bec43e8e53495ba86278cc52e7589549492c8dfdc81d19f4fdec0cee6ba13d2ad2c928
   languageName: node
   linkType: hard
 
@@ -9766,7 +9782,7 @@ __metadata:
   resolution: "theme-ui-visx@workspace:."
   dependencies:
     "@babel/core": ^7.17.2
-    "@emotion/jest": ^11.7.1
+    "@emotion/jest": ^11.10.0
     "@mdx-js/loader": ^1.6.22
     "@next/mdx": ^12.0.10
     "@react-hook/throttle": ^2.2.0
