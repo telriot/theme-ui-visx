@@ -29,7 +29,7 @@
     "@theme-ui/style-guide": "^0.12.0",
     "@visx/visx": "^2.9.0",
     "color": "^4.2.1",
-    "colorette": "^2.0.16",
+    "colorette": "^2.0.19",
     "d3-scale-chromatic": "^3.0.0",
     "date-fns": "^2.29.3",
     "eslint-config-prettier": "^8.5.0",

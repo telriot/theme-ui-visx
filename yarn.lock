@@ -4057,6 +4057,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"colorette@npm:^2.0.19":
+  version: 2.0.19
+  resolution: "colorette@npm:2.0.19"
+  checksum: 888cf5493f781e5fcf54ce4d49e9d7d698f96ea2b2ef67906834bb319a392c667f9ec69f4a10e268d2946d13a9503d2d19b3abaaaf174e3451bfe91fb9d82427
+  languageName: node
+  linkType: hard
+
 "colors@npm:1.4.0":
   version: 1.4.0
   resolution: "colors@npm:1.4.0"
@@ -9582,7 +9589,7 @@ __metadata:
     "@visx/visx": ^2.9.0
     babel-jest: ^27.5.1
     color: ^4.2.1
-    colorette: ^2.0.16
+    colorette: ^2.0.19
     cypress: ^9.4.1
     d3-scale-chromatic: ^3.0.0
     date-fns: ^2.29.3
