@@ -1046,13 +1046,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/mdx@npm:^12.3.1":
-  version: 12.3.1
-  resolution: "@next/mdx@npm:12.3.1"
+"@next/mdx@npm:^13.0.2":
+  version: 13.0.2
+  resolution: "@next/mdx@npm:13.0.2"
+  dependencies:
+    source-map: ^0.7.0
   peerDependencies:
     "@mdx-js/loader": ">=0.15.0"
     "@mdx-js/react": "*"
-  checksum: ee103a80b7ee4a35b277bdaaff8e0d2bbd7f6429ef55d7f7480583734d3ae83386b62f19ba8c8d05c15203d24dd4d0dc75c4eb6c875f2e2be45e54a699bb084d
+  checksum: ae0900a7ff676860ce1449a068f2fb25742ed1ecdd4dcba0d56956709105fb3ebb1ae9a2e9fd4a20d643068ead3fc5f169e9ed5f70f8c0a0d9543aadadc08a67
   languageName: node
   linkType: hard
 
@@ -9169,6 +9171,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"source-map@npm:^0.7.0":
+  version: 0.7.4
+  resolution: "source-map@npm:0.7.4"
+  checksum: 01cc5a74b1f0e1d626a58d36ad6898ea820567e87f18dfc9d24a9843a351aaa2ec09b87422589906d6ff1deed29693e176194dc88bcae7c9a852dc74b311dbf5
+  languageName: node
+  linkType: hard
+
 "source-map@npm:^0.7.3":
   version: 0.7.3
   resolution: "source-map@npm:0.7.3"
@@ -9564,7 +9573,7 @@ __metadata:
     "@babel/core": ^7.17.2
     "@emotion/jest": ^11.10.0
     "@mdx-js/loader": ^1.6.22
-    "@next/mdx": ^12.3.1
+    "@next/mdx": ^13.0.2
     "@react-hook/throttle": ^2.2.0
     "@testing-library/cypress": ^8.0.3
     "@testing-library/jest-dom": ^5.16.2
