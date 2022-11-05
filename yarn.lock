@@ -4040,13 +4040,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"color@npm:^4.2.1":
-  version: 4.2.1
-  resolution: "color@npm:4.2.1"
+"color@npm:^4.2.3":
+  version: 4.2.3
+  resolution: "color@npm:4.2.3"
   dependencies:
     color-convert: ^2.0.1
     color-string: ^1.9.0
-  checksum: 03fb3100a8ba457b45f3f9828f64e982d683f48c841e3d26a619bd88924fcc47f1124b2fdf3e4ae518c4129e9885c19052244ba1ea0b06d86beffc5f5e551d62
+  checksum: 0579629c02c631b426780038da929cca8e8d80a40158b09811a0112a107c62e10e4aad719843b791b1e658ab4e800558f2e87ca4522c8b32349d497ecb6adeb4
   languageName: node
   linkType: hard
 
@@ -9581,7 +9581,7 @@ __metadata:
     "@typescript-eslint/parser": ^5.40.1
     "@visx/visx": ^2.9.0
     babel-jest: ^27.5.1
-    color: ^4.2.1
+    color: ^4.2.3
     colorette: ^2.0.16
     cypress: ^9.4.1
     d3-scale-chromatic: ^3.0.0
