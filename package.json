@@ -67,7 +67,7 @@
     "eslint-plugin-sonarjs": "^0.16.0",
     "husky": "^7.0.4",
     "jest": "^27.5.1",
-    "lint-staged": "^12.3.3",
+    "lint-staged": "^13.1.2",
     "prettier": "^2.7.1",
     "resize-observer-polyfill": "^1.5.1",
     "ts-jest": "^27.1.3",
